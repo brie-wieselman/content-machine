@@ -1,0 +1,81 @@
+{
+  "brand": {
+    "name": "Your Brand Name",
+    "handle": "@yourhandle",
+    "one_line": "One sentence describing who you help and how."
+  },
+
+  "voice": {
+    "fingerprint_file": "config/voice-fingerprint.md",
+    "content_rules_file": "config/content-rules.md",
+    "_comment": "voice-fingerprint.md = output of the `voiceprint` skill (github.com/brie-wieselman/voiceprint). content-rules.md = your brand/content canon; the writer reads sections from it BY HEADING (see agents/brand-context.js)."
+  },
+
+  "visual": {
+    "brand_visual_guide_file": "config/brand-visual-guide.md",
+    "canva_templates": {
+      "_comment": "Map each content type to YOUR OWN saved Canva brand-template IDs. Get these from your Canva account — never reuse anyone else's.",
+      "quote_card": "YOUR_CANVA_TEMPLATE_ID",
+      "listicle": "YOUR_CANVA_TEMPLATE_ID",
+      "single_stat": "YOUR_CANVA_TEMPLATE_ID"
+    }
+  },
+
+  "topics": {
+    "mode": "manual",
+    "_comment": "manual = you supply the niche + topic ideas below (no paid APIs needed). scraper = the engine mines trending topics via your own paid API keys (see scraper block). Start with manual.",
+    "niche_keywords": ["your", "core", "topic", "keywords"],
+    "manual_topics": [
+      "A specific topic or angle you want content about",
+      "Another one"
+    ],
+    "scraper": {
+      "enabled": false,
+      "_comment": "OPTIONAL. Requires your own paid RapidAPI + YouTube Data API keys in .env. Leave disabled to run fully on manual topics.",
+      "youtube_channels_to_watch": [],
+      "reddit_subs_to_watch": []
+    }
+  },
+
+  "platforms": {
+    "_comment": "Turn on only the platforms you actually post to. Each needs a connected account in your scheduler (see scheduler block).",
+    "linkedin": true,
+    "instagram": false,
+    "tiktok": false,
+    "threads": false,
+    "x": false,
+    "facebook": false,
+    "pinterest": false
+  },
+
+  "articles": {
+    "enabled": true,
+    "output_dir": "output/articles",
+    "_comment": "Finished articles are written here as markdown + HTML for you to publish anywhere (blog, Substack, etc.). No website integration required."
+  },
+
+  "approval": {
+    "mode": "approve",
+    "_comment": "approve = nothing schedules until you reply an approval (safest, default). auto = graded content schedules automatically. You can set this per run.",
+    "approval_channel_email": "you@example.com"
+  },
+
+  "schedule": {
+    "_comment": "When the pipeline runs. Cron-like. This does NOT publish — it produces + queues; publishing follows your approval.mode.",
+    "run_days": ["Mon", "Thu"],
+    "run_hour_local": 6
+  },
+
+  "scheduler": {
+    "backend": "blotato",
+    "_comment": "Blotato is the supported multi-platform scheduler (one API posts to IG/TikTok/LinkedIn/Threads/etc.). Put your Blotato account IDs per platform here; key goes in .env.",
+    "blotato_account_ids": {
+      "linkedin": "YOUR_BLOTATO_ACCOUNT_ID"
+    }
+  },
+
+  "data": {
+    "google_sheet_id": "YOUR_GOOGLE_SHEET_ID",
+    "_comment": "The engine uses a Google Sheet as its database (calendar, research, performance log). Copy the template sheet (see ONBOARDING.md) and put its ID here."
+  }
+}

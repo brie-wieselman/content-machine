@@ -9,10 +9,12 @@ Built agent-by-agent by a non-traditional developer (a clinician who learned to 
 by building). Published as a reference architecture — the ideas and the shape, not a
 turnkey product.
 
-> **Note on scope.** This is a *reference implementation*, not a plug-and-play app.
-> It documents a working private system. You'll need to supply your own API keys,
-> your own brand-voice spec, and your own scheduling accounts. See
-> [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for how every part fits together.
+> **Turnkey, with setup.** You can stand this up for your own brand: plug in your
+> voice fingerprint, your visual guide, your own Canva templates, pick your platforms
+> and schedule, and choose approve-before-post or full auto. It produces **articles,
+> Canva posts, and social copy in your voice** — no video, no voice cloning. Follow
+> **[`ONBOARDING.md`](ONBOARDING.md)** to set it up (~60–90 min). You bring your own
+> API keys and accounts; everything brand-specific lives in [`config/`](config/).
 
 ## The one design principle everything is built around
 
@@ -52,11 +54,15 @@ See the full walkthrough in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
   and proprietary voice rules are deliberately excluded.
 - Not maintained as a supported product. Issues welcome; guarantees, no.
 
-## Setup (high level)
+## Setup
 
-1. `cp .env.example .env` and fill in your own keys.
-2. Provide your own brand-voice spec (see the voice-fingerprint method — separate repo).
-3. Run the orchestrator in mock mode first to prove the plumbing with no credentials.
+Full step-by-step in **[`ONBOARDING.md`](ONBOARDING.md)**. The short version:
+1. `git clone` + `npm install`
+2. Build your voice fingerprint with the [voiceprint](https://github.com/brie-wieselman/voiceprint) skill → `config/voice-fingerprint.md`
+3. `cp config/config.example.json config/config.json` and fill in your brand, platforms, Canva template IDs, schedule, and approve-vs-auto mode
+4. Copy the Google Sheet template + add your keys to `.env`
+5. `ORCH_MOCK=1 python3 orchestrator/run.py pipeline` — dry-run with zero credentials to prove the wiring
+6. `node pipeline.js --once` — first real run (emails you for approval by default)
 
 ## License
 
