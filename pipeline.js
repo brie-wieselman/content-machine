@@ -37,6 +37,17 @@ function enabledPlatforms(cfg) {
 
 // Stage runner: each agent reads config + writes its output to the sheet /
 // output dir. We pass the config path so agents never hardcode anything.
+// Every stage result is also appended to logs/pipeline-log.txt — that file is
+// what alerts.js --check (the dead-man's switch) and the daily reporter read,
+// so a stage failure is never only on stdout.
+const LOG_DIR = path.join(ROOT, 'logs');
+const PIPELINE_LOG = path.join(LOG_DIR, 'pipeline-log.txt');
+function logStage(status, label, extra) {
+  fs.mkdirSync(LOG_DIR, { recursive: true });
+  fs.appendFileSync(PIPELINE_LOG,
+    `[${new Date().toISOString()}] ${status} ${label}${extra ? ' — ' + extra : ''}\n`);
+}
+
 function runStage(label, cmd, args, { dry }) {
   console.log(`\n=== ${label} ===`);
   if (dry) { console.log(`  [dry] would run: ${cmd} ${args.join(' ')}`); return; }
@@ -46,8 +57,10 @@ function runStage(label, cmd, args, { dry }) {
     // Record and continue — one failing stage should not abort the whole run.
     // The alerts agent (called at the end) surfaces any FAIL to you.
     console.error(`  ${label} FAILED (exit ${e.status}). Continuing; alerts will flag it.`);
+    logStage('FAIL', label, `exit ${e.status}`);
     return false;
   }
+  logStage('OK', label);
   return true;
 }
 

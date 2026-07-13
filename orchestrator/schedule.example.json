@@ -1,0 +1,35 @@
+[
+  {
+    "agent": "pipeline",
+    "when": [
+      { "weekday": 1, "hour": 6, "minute": 0 },
+      { "weekday": 4, "hour": 6, "minute": 0 }
+    ],
+    "note": "Mon+Thu 6:00 — the sole content batch. Keep one batch cadence; don't schedule the granular agents alongside it."
+  },
+  {
+    "agent": "publisher-queue",
+    "when": [
+      { "hour": 6, "minute": 15 },
+      { "hour": 8, "minute": 15 },
+      { "hour": 10, "minute": 15 },
+      { "hour": 12, "minute": 15 },
+      { "hour": 14, "minute": 15 },
+      { "hour": 16, "minute": 15 },
+      { "hour": 18, "minute": 15 },
+      { "hour": 20, "minute": 15 },
+      { "hour": 21, "minute": 45 }
+    ],
+    "note": "Approval-reply polling through the day (daytime only) — these slots cover reply latency without a resident process."
+  },
+  {
+    "agent": "analyst",
+    "when": { "weekday": 0, "hour": 16, "minute": 0 },
+    "note": "Sundays 16:00 — weekly report + experiment scoring + spawn-signal check."
+  },
+  {
+    "agent": "brand-voice",
+    "when": { "weekday": 1, "hour": 6, "minute": 45 },
+    "note": "Weekly brand-voice maintainer: keeps the voice spec fresh and scans recent output for drift."
+  }
+]

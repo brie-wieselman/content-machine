@@ -1,0 +1,26 @@
+{
+  "_readme": "Deterministic analytics used by the analyst under ORCH_MOCK=1 (see attribution.py). Placeholder niche: urban gardening. The real run reads orchestrator/analytics-inbox.json in this same shape.",
+  "conversions_total": 5,
+  "conversion_metric": "new paid subscriptions",
+  "utm_campaigns": [
+    { "campaign": "exp-20260101-balcony-hooks", "conversions": 4 },
+    { "campaign": "maker", "conversions": 1 }
+  ],
+  "subscribers": { "start": 1180, "end": 1240, "delta": "+60" },
+  "top_posts": [
+    { "title": "Why balcony tomatoes fail by July", "platform": "instagram", "views": 12400, "engagements": 610 },
+    { "title": "The soil test every renter skips", "platform": "linkedin", "views": 3900, "engagements": 240 },
+    { "title": "Three containers that outgrow raised beds", "platform": "instagram", "views": 2100, "engagements": 95 }
+  ],
+  "signals": [
+    {
+      "name": "container-myth-busting",
+      "engagement_lift_pct": 55,
+      "hypothesis": "Myth-busting hooks about container limits outperform how-to hooks on instagram.",
+      "evidence": "610 vs avg 315 engagements",
+      "platform": "instagram",
+      "topic_focus": "container gardening myths",
+      "hook_style": "myth-busting"
+    }
+  ]
+}

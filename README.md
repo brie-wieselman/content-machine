@@ -1,9 +1,10 @@
 # Content Machine
 
 An autonomous content-operations pipeline for a solo creator — with a hard human
-approval gate. It finds what's trending, drafts content in a defined brand voice,
-grades its own drafts, produces video, and queues everything for scheduling. It never
-publishes anything without an explicit human "go."
+approval gate. It finds topics, drafts articles and social copy in a defined brand
+voice, grades its own drafts, builds Canva visual briefs from your templates, and
+queues everything for scheduling. In its default mode it never publishes anything
+without an explicit human "go."
 
 Built agent-by-agent by a non-traditional developer (a clinician who learned to build
 by building). Published as a reference architecture — the ideas and the shape, not a
@@ -27,22 +28,20 @@ thing permitted to publish, and it only runs on an explicit approval reply.
 
 ## Architecture at a glance
 
-Nine sequential stages, two parallel lanes, and a reliability layer that runs
+Eight sequential stages, a parallel article lane, and a reliability layer that runs
 alongside everything:
 
 1. **Orchestration** — one scheduled entry point runs the whole chain
-2. **Trend scout** — finds breakout topics across platforms
-3. **Brand voice context** — loads the voice spec into every prompt
-4. **Content generation** — writes posts, scripts, visual briefs
-5. **Quality gate** — grades each draft against the voice spec
-6. **Video production** — routes scripts to avatar / voiceover / thumbnail engines
-7. **Two-gate approval** — render first, publish only on human reply
-8. **Scheduler** — the *only* file allowed to publish
-9. **Reporting & analytics** — daily brief, weekly performance read
+2. **Topics** — your declared topics by default; optional trend scout with your own API keys
+3. **Brand voice context** — loads your voice fingerprint + content rules into every prompt
+4. **Content generation** — writes articles and per-platform social copy
+5. **Quality gate** — grades each draft against the voice spec; weak drafts rewritten or rejected
+6. **Visuals** — Canva design briefs from your own brand templates
+7. **Approval → scheduling** — approve-per-item by email, or full auto once you trust it
+8. **Reporting & analytics** — one daily digest, one weekly performance read
 
-**Parallel lanes:** a long-form blog publisher and a digital-product pipeline, both
-approval-gated.
-**Reliability layer:** a dead-man's switch on silent failures + a weekly structural
+**Parallel lane:** a long-form article writer that outputs publish-anywhere files.
+**Reliability layer:** a dead-man's switch on silent failures + a periodic structural
 self-audit for drift.
 
 See the full walkthrough in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).

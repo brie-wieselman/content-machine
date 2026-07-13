@@ -1,0 +1,9 @@
+{
+  "_comment": "Copy to config/linkedin-watchlist.json and replace with the creators YOU admire. Agent 2 mines these profiles for outlier posts (engagement vs the author's own average) and saves the STRUCTURE of winners — hook shape, line rhythm, visual format — for the writer to pattern-match. Never lift phrasing. 'slug' = the linkedin.com/in/<slug> part of the public URL (or /company/<slug> with type: 'company'). 'host' = your RapidAPI LinkedIn-scraper provider host — pick any provider you subscribe to; if one shuts down, swapping this one line is the whole fix. 'lane' is a free-form label for which content pillar this creator maps to.",
+  "host": "your-linkedin-scraper-provider.p.rapidapi.com",
+  "profiles": [
+    { "name": "Example Creator", "slug": "example-creator", "lane": "core niche", "note": "The category benchmark in your niche — study their hooks, never their words" },
+    { "name": "Example Adjacent Voice", "slug": "example-adjacent-voice", "lane": "adjacent", "note": "VERIFY SLUG — common name, multiple profiles" },
+    { "name": "Example Company", "slug": "example-company", "lane": "market signals", "type": "company", "note": "Company pages need type: 'company'; watch what they amplify, not just what they post" }
+  ]
+}

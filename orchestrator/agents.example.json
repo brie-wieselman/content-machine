@@ -1,42 +1,55 @@
 {
   "pipeline": {
-    "cmd": ["node", "agents/run-daily-pipeline.js"],
-    "desc": "The full hardened content chain (scout -> writer -> grader gate -> video -> reporter). SOLE content entry point per the locked rule — the granular entries below exist for manual runs and experiments, not for scheduling alongside this."
+    "cmd": [
+      "node",
+      "pipeline.js",
+      "--once"
+    ],
+    "desc": "The full content chain (topics -> writer -> grader gate -> visuals -> approval/schedule -> reporter). SOLE content entry point - the granular entries below exist for manual runs and experiments, not for scheduling alongside this."
   },
   "scout": {
-    "cmd": ["node", "agents/agent2-scout.js", "--once"],
+    "cmd": [
+      "node",
+      "agents/agent2-scout.js",
+      "--once"
+    ],
     "desc": "Research collector: mines trending/outlier content across platforms into the research tabs."
   },
   "maker": {
-    "cmd": ["node", "agents/agent3-writer.js"],
+    "cmd": [
+      "node",
+      "agents/agent3-writer.js"
+    ],
     "desc": "Content writer: turns new research signals into on-brand content packages awaiting review (emails an approval request)."
   },
   "grader": {
-    "cmd": ["node", "agents/run-daily-pipeline.js", "--agents", "grader"],
-    "desc": "Quality gate over pending packages: grades vs the brand-voice spec, archives anything below threshold after one rewrite. As a pipeline sub-run this also sends the daily-brief email at the end."
+    "cmd": [
+      "node",
+      "agents/quality-monitor.js"
+    ],
+    "desc": "Quality gate over pending packages: grades vs the brand-voice spec; ship/fix/reject thresholds with one rewrite pass."
   },
   "publisher-queue": {
-    "cmd": ["node", "agents/approval-handler.js", "--once"],
-    "desc": "Approval poller: reads the operator's email replies; ONLY on an explicit approval does it invoke the scheduler. This is the manual-approval flow — the one path that can publish."
+    "cmd": [
+      "node",
+      "agents/approval-handler.js",
+      "--once"
+    ],
+    "desc": "Approval poller: reads the operator's email replies; ONLY on an explicit approval does it invoke the scheduler. This is the manual-approval flow \u2014 the one path that can publish."
   },
   "analyst": {
-    "cmd": ["python3", "orchestrator/analyst.py"],
+    "cmd": [
+      "python3",
+      "orchestrator/analyst.py"
+    ],
     "desc": "Weekly analyst: what posted, what performed, attributed conversions, subscriber delta, exactly one recommended adjustment. Also scores experiments and drafts spawn manifests on threshold signals."
   },
   "brand-voice": {
-    "cmd": ["node", "agents/agent1-brand-voice.js", "--run"],
+    "cmd": [
+      "node",
+      "agents/agent1-brand-voice.js",
+      "--run"
+    ],
     "desc": "Weekly brand-voice maintainer: keeps the voice spec fresh and scans recent output for drift."
-  },
-  "librarian": {
-    "cmd": ["python3", "storefront/librarian.py"],
-    "desc": "Periodic: inventories the source material and proposes the next digital product (outline + audience + price) to the approval queue. Never publishes."
-  },
-  "producer": {
-    "cmd": ["python3", "storefront/producer.py"],
-    "desc": "On approval: drafts the full product from source material in the brand voice, through the grader. Output to the approval queue. Never publishes."
-  },
-  "formatter": {
-    "cmd": ["python3", "storefront/formatter.py"],
-    "desc": "Packages an approved draft into a clean PDF + a storefront listing draft (title/description/price) to the approval queue. Never publishes."
   }
 }

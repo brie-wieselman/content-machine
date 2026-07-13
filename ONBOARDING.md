@@ -60,7 +60,8 @@ Also create:
 - `config/brand-visual-guide.md` — your colors, fonts, visual do/don'ts.
 
 ## Step 4 — Set up the Google Sheet (the database)
-1. Make a copy of the template sheet: **[TEMPLATE LINK — see note below]**
+1. Create a blank Google Sheet and add the tabs/columns from
+   **[`docs/sheet-template.md`](docs/sheet-template.md)** (~5 minutes)
 2. Copy its ID from the URL (`.../spreadsheets/d/THIS_PART/edit`)
 3. Put it in `config.json → data.google_sheet_id`
 4. Authorize Google locally (one time):

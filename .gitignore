@@ -18,3 +18,7 @@ renders/
 
 # OS
 .DS_Store
+
+# Agent runtime output (articles, scout digests, references)
+output/
+dashboard/

@@ -1,0 +1,46 @@
+{
+  "_readme": "Per-agent graduation state. Copy to state.json to start. mode: 'approval-queue' means the agent's output waits for the operator; 'auto' means it may act unattended. THE ORCHESTRATOR NEVER FLIPS A MODE ITSELF — run.py only reports GRADUATION-ELIGIBLE in the log; the operator edits this file by hand to graduate an agent. non_graduating:true agents can never leave approval-queue no matter what.",
+  "agents": {
+    "pipeline": {
+      "mode": "auto",
+      "note": "produces + queues for approval; publishing is gated downstream by publisher-queue"
+    },
+    "scout": {
+      "mode": "auto",
+      "note": "read-only research collection"
+    },
+    "maker": {
+      "mode": "approval-queue",
+      "graduation_criteria": {
+        "weeks": 2,
+        "unedited_approval_rate": 0.9,
+        "requires_manual_flag": true
+      }
+    },
+    "grader": {
+      "mode": "auto",
+      "note": "gate agent — its output is grades, not posts"
+    },
+    "publisher-queue": {
+      "mode": "approval-queue",
+      "graduation_criteria": {
+        "weeks": 2,
+        "unedited_approval_rate": 0.9,
+        "requires_manual_flag": true
+      },
+      "note": "HARD RULE: even at 100% approvals the orchestrator only logs eligibility. Publishing without per-post approval requires the operator editing this file themselves."
+    },
+    "analyst": {
+      "mode": "auto",
+      "note": "reports only"
+    },
+    "brand-voice": {
+      "mode": "auto",
+      "note": "maintains the voice spec"
+    }
+  },
+  "experiments": {
+    "active": [],
+    "history": []
+  }
+}
