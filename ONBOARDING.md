@@ -51,7 +51,9 @@ cp config/config.example.json config/config.json
 Open `config/config.json` and set: your brand name + handle, which **platforms** you
 post to, your **topics** (start in `manual` mode — just list your niche + a few
 ideas), your **Canva template IDs**, and `approval.mode` (**start with `approve`**).
-See `config/README.md` for what each field means.
+See `config/README.md` for what each field means — it also covers **how to actually
+get your Canva template IDs** (it's a share-link, not an API call, unless you're on
+Canva Enterprise) and **what the optional trend scraper costs** if you ever turn it on.
 
 Also create:
 - `config/content-rules.md` — your brand/content canon. Use the section headings the
@@ -81,7 +83,8 @@ Also create:
 cp .env.example .env
 ```
 Fill in your `ANTHROPIC_API_KEY`, `SCHEDULER_API_KEY` (Blotato), `MAIL_SENDER`, and —
-only if you enabled the scraper — your `YOUTUBE_DATA_API_KEY` + `RAPIDAPI_KEY`.
+only if you enabled the scraper — your `YOUTUBE_DATA_API_KEY` (free) + `RAPIDAPI_KEY`
+(this one is normally a paid subscription — see `config/README.md` before signing up).
 
 ## Step 6 — Prove the plumbing (no credentials, no network)
 ```bash
