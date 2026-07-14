@@ -1,0 +1,13 @@
+{
+  "name": "content-machine",
+  "version": "1.0.0",
+  "description": "Reference architecture for an approval-gated, config-driven content-operations pipeline.",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "googleapis": "^173.0.0"
+  }
+}

@@ -87,11 +87,19 @@ only if you enabled the scraper — your `YOUTUBE_DATA_API_KEY` (free) + `RAPIDA
 (this one is normally a paid subscription — see `config/README.md` before signing up).
 
 ## Step 6 — Prove the plumbing (no credentials, no network)
+The orchestrator's own registry/schedule/state files ship as `.example` templates —
+copy them once before using `orchestrator/run.py` for the first time:
+```bash
+cp orchestrator/agents.example.json orchestrator/agents.json
+cp orchestrator/schedule.example.json orchestrator/schedule.json
+cp orchestrator/state.example.json orchestrator/state.json
+```
+Then dry-run the whole engine with deterministic mocks:
 ```bash
 ORCH_MOCK=1 python3 orchestrator/run.py pipeline
 ```
-This dry-runs the whole engine with deterministic mocks. If it completes, your wiring
-is correct. Fix any path/config errors here before spending a single API credit.
+If it completes, your wiring is correct. Fix any path/config errors here before
+spending a single API credit.
 
 ## Step 7 — First real run
 ```bash
